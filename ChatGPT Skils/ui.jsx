@@ -38,3 +38,22 @@ export function MarketChart({className='',compact=false}) {
 export function HandNote({children,className=''}) {return <span className={`font-['Comic_Sans_MS',cursive] italic leading-tight text-violet-700 -rotate-6 ${className}`}>{children}</span>}
 export function ArrowLink({children,href='#featured'}) {return <a href={href} className="inline-flex items-center gap-1 text-violet-700 text-xs font-semibold hover:underline">{children}<ChevronRight size={15}/></a>}
 export { ArrowRight,Play,ShoppingCart };
+
+/** Reusable layered hero advertising surface: absolutely positioned mockups remain
+ * independent of navigation and content. Replace only the graphics when licensed
+ * original asset layers are available. */
+export function CustomGlowFX({children,className=''}) {
+ return <div className={`relative isolate ${className}`}><div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 rounded-[44%] bg-[radial-gradient(ellipse_at_30%_35%,#e5dfff_0%,transparent_58%),radial-gradient(ellipse_at_82%_45%,#dfeaff_0%,transparent_65%)] blur-xl"/>{children}</div>;
+}
+export function HeroAdContainer({children,className=''}) {
+ return <CustomGlowFX className={`relative h-[300px] sm:h-[370px] lg:h-[390px] ${className}`}><div className="absolute inset-0">{children}</div></CustomGlowFX>;
+}
+export function AdBannerContainer({children,className=''}) {
+ return <div className={`relative isolate overflow-hidden rounded-lg border p-4 shadow-[0_4px_14px_#34245d08] ${className}`}>{children}</div>;
+}
+export function CoinGrowthArt(){
+ return <svg aria-hidden="true" viewBox="0 0 130 100" className="h-[86px] w-[112px] drop-shadow-lg"><defs><linearGradient id="coin" x1="0" y1="0" x2="1" y2="1"><stop stopColor="#ffdc84"/><stop offset="1" stopColor="#f97316"/></linearGradient></defs><path d="M6 92h120" stroke="#fed7aa" strokeWidth="2"/>{[28,44,59,78].map((h,i)=><rect key={i} x={18+i*27} y={94-h} width="17" height={h} rx="3" fill="url(#coin)" stroke="#fdba74"/>)}<circle cx="25" cy="72" r="18" fill="url(#coin)" stroke="#fff7ed" strokeWidth="3"/><text x="25" y="78" textAnchor="middle" fill="white" fontWeight="bold" fontSize="21">$</text><path d="M41 57 70 31 89 39 116 8m-17 0h17v17" stroke="#fb923c" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" fill="none"/></svg>;
+}
+export function DocumentGearArt(){
+ return <svg aria-hidden="true" viewBox="0 0 130 98" className="h-[90px] w-[112px] drop-shadow-md"><rect x="22" y="16" width="78" height="60" rx="6" fill="#2563eb"/><rect x="29" y="23" width="64" height="44" rx="3" fill="#eff6ff"/><path d="m49 36-8 8 8 8m24-16 8 8-8 8m-22 9 6-34" stroke="#1d4ed8" fill="none" strokeLinecap="round" strokeWidth="3"/><path d="M16 82h92" stroke="#1e40af" strokeWidth="7" strokeLinecap="round"/><path d="m105 17 4 4 6-2 3 5-3 5 3 5-5 4-6-3-5 3-5-4 3-6-4-4 3-5 6 1z" fill="#93c5fd"/></svg>;
+}
