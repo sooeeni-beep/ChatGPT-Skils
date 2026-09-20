@@ -15,3 +15,24 @@ export const products = [
   {name:'Breakout Strategy',sub:'TradingView Strategy',platform:'TradingView',price:39,tag:'New',accent:'#7c3aed',seed:2},
 ];
 export const markets = ['FOREX','GOLD','NASDAQ','S&P 500','CRYPTO','COMMODITIES','STOCKS'];
+
+/** Reference screenshot bounds at 1280 × 1170, left/top/right/bottom in pixels.
+ * Source image is a flattened bitmap: crop regions contain adjacent pixels;
+ * keep original image separately for high fidelity rather than assuming isolated layers.
+ */
+export const screenshotGeometry = {
+  viewport: {width:1280,height:1170},
+  header:[0,0,1280,95], hero:[27,105,1255,476],
+  heroAd:[559,111,1180,468], laptop:[611,121,1065,445],
+  phone:[1040,196,1173,459], floatingBadges:[572,196,710,354],
+  categories:[29,486,1252,713],
+  categoryPreviews:[[47,598,174,668],[292,599,438,662],[544,592,681,665],[783,601,923,665],[1033,589,1164,667]],
+  affiliate:[29,726,633,878], custom:[645,726,1252,878],
+  featured:[28,889,630,1098], testimonials:[645,891,937,1097],
+  signup:[948,892,1251,1094], marketTrust:[0,1107,1280,1170]
+};
+export const assetPolicy = {
+  decorativeSource:'reference screenshot', iconLibrary:'lucide-react',
+  extraction:'Use exact source-image crops only when original pixel data can be committed to the repository.',
+  fallback:'Use responsive HTML/CSS/SVG components; never claim a synthesized device is an exact pixel crop.'
+};
