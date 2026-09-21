@@ -20,26 +20,73 @@ export function HeroSection(){return <section id="home" className="relative isol
    <img src="/assets/hero-composite.svg" alt="Trading platform showcase showing MetaTrader 4, MetaTrader 5, cTrader and TradingView badges, a chart laptop and a trading journal phone" className="absolute inset-0 z-10 h-full w-full object-contain object-center" loading="eager" fetchPriority="high"/>
    <a href="#journal" aria-label="Open the trading journal" className="absolute bottom-[5%] right-[6%] z-20 h-[12%] w-[16%] rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-violet-600"/>
   </div></div></div></section>}
-const categories=[
- {id:'indicators',title:'Indicators',desc:'Powerful technical indicators for MT4, MT5, cTrader & TradingView.',icon:BarChart3,theme:'blue',action:'Browse Indicators',type:'chart'},
- {id:'experts',title:'Experts & Strategies',desc:'Automate your trading with verified EAs and strategies.',icon:Bot,theme:'green',action:'Browse EAs & Strategies',type:'curve'},
- {id:'scripts',title:'Scripts & Utilities',desc:'Simple tools. Big impact. Automate tasks, manage trades and save time.',icon:Code2,theme:'red',action:'Browse Scripts',type:'list'},
- {id:'education',title:'Education',desc:'Learn from top traders and industry professionals. Live or on-demand.',icon:GraduationCap,theme:'blue',action:'Explore Education',type:'video'},
- {id:'signals',title:'Trading Signals',desc:'Access high-performing signals (Pay Per View).',icon:Radio,theme:'red',action:'Explore Signals',type:'signals'}
+const tradingTools=[
+ {id:'indicators',title:'Indicators',desc:'Professional indicators to analyze markets with precision.',icon:BarChart3,accent:'violet',type:'chart'},
+ {id:'experts',title:'Experts & Strategies',desc:'Automated trading systems with verified EAs and strategy results.',icon:Bot,accent:'blue',type:'curve'},
+ {id:'scripts',title:'Scripts & Utilities',desc:'Powerful scripts and utilities to simplify your trading.',icon:Settings,accent:'green',type:'scripts'},
+ {id:'signals',title:'Trading Signals',desc:'Real-time trading signals from top traders and verified providers.',icon:Radio,accent:'red',type:'signals'}
 ];
-const cardStyles={blue:'bg-[#f7f8ff] border-[#e0e7ff] text-blue-700',green:'bg-[#f1fdf9] border-[#d6f5e8] text-emerald-700',red:'bg-[#fff7f7] border-[#ffdddd] text-red-600'};
-const referencePreviews = {
- chart:{src:'/assets/indicator-preview.svg',alt:'Source-image crop of the Indicators preview chart'},
- curve:{src:'/assets/ea-preview.svg',alt:'Source-image crop of the expert-advisor performance preview'},
- video:{src:'/assets/education-preview.svg',alt:'Source-image crop of the education video thumbnail'},
- signals:{src:'/assets/signals-preview.svg',alt:'Source-image crop of the trading signals feed'}
+const toolAccent={
+ violet:{icon:'bg-gradient-to-br from-violet-600 to-indigo-600 text-white',ring:'bg-violet-50 text-violet-700 border-violet-100'},
+ blue:{icon:'bg-gradient-to-br from-blue-600 to-blue-700 text-white',ring:'bg-violet-50 text-violet-700 border-violet-100'},
+ green:{icon:'bg-gradient-to-br from-emerald-600 to-green-700 text-white',ring:'bg-violet-50 text-violet-700 border-violet-100'},
+ red:{icon:'bg-gradient-to-br from-red-500 to-rose-600 text-white',ring:'bg-violet-50 text-violet-700 border-violet-100'}
 };
-function CategoryPreview({type}) {
- const asset=referencePreviews[type];
- if(asset) return <div className="relative h-[65px] overflow-hidden rounded-md bg-white/75"><img src={asset.src} alt={asset.alt} className="block h-full w-full object-fill" loading="lazy"/></div>;
- return <div className="grid h-[65px] content-center gap-1 overflow-hidden rounded-md bg-white/75 px-2" aria-label="Scripts and utilities feature preview">{['Trade Management','Chart Utilities','Session Tools'].map(x=><div className="flex items-center gap-1 text-[9px] text-slate-700" key={x}><CheckCircle2 size={10} className="text-blue-600"/>{x}</div>)}</div>;
+function ToolPreview({type}) {
+ if(type==='chart') return <div className="relative h-full overflow-hidden rounded-[12px] bg-[#071934]">
+   <img src="/assets/indicator-preview.svg" alt="SuperTrend indicator chart preview" className="h-full w-full object-cover" loading="lazy"/>
+   <div className="absolute left-3 top-3 rounded-lg bg-[#12274b]/95 px-2.5 py-2 text-white shadow">
+    <div className="text-[10px] font-medium">SuperTrend</div><div className="text-[16px] font-black text-emerald-400">+3.23%</div>
+   </div>
+  </div>;
+ if(type==='curve') return <div className="relative h-full overflow-hidden rounded-[12px] bg-[#071934]">
+   <img src="/assets/ea-preview.svg" alt="Expert advisor performance curve" className="h-full w-full object-cover" loading="lazy"/>
+   <div className="absolute right-3 top-3 rounded-lg bg-[#10233f]/95 px-3 py-2 text-[10px] text-slate-300 shadow">
+    <div className="flex min-w-[112px] justify-between gap-3"><span>Win Rate</span><b className="text-emerald-400">68.5%</b></div>
+    <div className="mt-1 flex justify-between gap-3"><span>Total Trades</span><b className="text-white">248</b></div>
+    <div className="mt-1 flex justify-between gap-3"><span>Total P&amp;L</span><b className="text-emerald-400">+12.4%</b></div>
+   </div>
+  </div>;
+ if(type==='scripts') return <div className="grid h-full grid-cols-2 gap-2 rounded-[12px] bg-[#061a30] p-3 text-white">
+   <div className="rounded-lg bg-[#0c2945] p-2.5">
+    <div className="text-[11px] font-bold">Trade Manager</div>
+    <div className="mt-3 flex gap-2"><span className="rounded bg-emerald-500 px-4 py-1 text-[10px] font-bold">Buy</span><span className="rounded bg-rose-500/80 px-4 py-1 text-[10px] font-bold">Sell</span></div>
+    <div className="mt-3 space-y-2 text-[9px] text-slate-300"><div className="flex items-center gap-1"><CheckCircle2 size={10} className="text-emerald-400"/>Draw CandleBox</div><div className="flex items-center gap-1"><CheckCircle2 size={10} className="text-emerald-400"/>OnNewBar()</div></div>
+   </div>
+   <div className="rounded-lg bg-[#0c2945] p-2.5">
+    <div className="text-[11px] font-bold">Risk Calculator</div>
+    <div className="mt-3 space-y-2 text-[9px] text-slate-300">
+     <div className="flex items-center justify-between"><span>Position Size</span><b className="rounded bg-[#173657] px-2 py-1 text-white">1.00</b></div>
+     <div className="flex items-center justify-between"><span>SL (pips)</span><b className="rounded bg-[#173657] px-2 py-1 text-white">50</b></div>
+     <div className="flex items-center justify-between"><span>TP (pips)</span><b className="rounded bg-[#173657] px-2 py-1 text-white">100</b></div>
+    </div>
+   </div>
+  </div>;
+ const rows=[['EURUSD','+1.26%','Buy'],['XAUUSD','+0.83%','Buy'],['BTCUSD','-0.21%','Sell'],['NAS100','+0.44%','Buy']];
+ return <div className="h-full rounded-[12px] bg-[#061a30] px-4 py-3 text-white">{rows.map(([symbol,pct,side],i)=><div key={symbol} className="grid grid-cols-[1fr_auto_65px] items-center gap-3 border-b border-white/5 py-1.5 last:border-0">
+   <div className="text-[11px] font-bold">{symbol}</div>
+   <div className={`text-[10px] font-bold ${pct.startsWith('-')?'text-red-400':'text-emerald-400'}`}>{pct}</div>
+   <span className={`rounded-full px-2 py-1 text-center text-[9px] font-bold ${side==='Buy'?'bg-emerald-500/80':'bg-rose-500/75'}`}>{side}</span>
+  </div>)}</div>;
 }
-export function CategoryCards(){return <section aria-label="Marketplace categories" className="mx-auto max-w-[1500px] px-5 lg:px-8"><div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">{categories.map(({id,title,desc,icon:Icon,theme:color,action,type})=><article id={id} key={id} className={`flex min-h-[220px] flex-col rounded-lg border p-3.5 shadow-[0_3px_12px_#2e245509] ${cardStyles[color]}`}><div className="mb-2 flex items-center gap-2"><Icon size={33} strokeWidth={2.4} className="shrink-0"/><h2 className="text-[14px] font-extrabold leading-tight">{title}</h2></div><p className="mb-2 min-h-[48px] text-[11px] leading-[1.4] text-[#4b5673]">{desc}</p><CategoryPreview type={type}/><a href="#featured" className="mt-auto flex items-center justify-center gap-2 rounded-md bg-white/75 px-1 py-2 text-[11px] font-bold hover:bg-white">{action}<ArrowRight size={14}/></a></article>)}</div></section>}
+export function CategoryCards(){return <section id="trading-tools" aria-label="Trading tools" className="mx-auto max-w-[1500px] px-5 pt-4 lg:px-8">
+ <div className="rounded-xl border border-[#e6e8fb] bg-white/90 p-4 shadow-[0_5px_20px_rgba(38,28,90,.04)] sm:p-5">
+  <div className="mb-4 flex items-end justify-between gap-4">
+   <div><h2 className="text-[25px] font-black tracking-[-.03em] text-[#111329] sm:text-[29px]">Explore <span className="text-violet-700">Trading Tools</span></h2><p className="mt-0.5 text-[13px] text-[#5c6992] sm:text-[15px]">Everything you need for a smarter trading experience.</p></div>
+   <a href="#featured" className="hidden items-center gap-2 text-[12px] font-bold text-violet-700 hover:underline sm:flex">View All Tools <ArrowRight size={17}/></a>
+  </div>
+  <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-4">
+   {tradingTools.map(({id,title,desc,icon:Icon,accent,type})=><article id={id} key={id} className="overflow-hidden rounded-xl border border-[#e4e6f6] bg-white shadow-[0_5px_16px_rgba(40,31,93,.06)]">
+    <div className="h-[150px] p-2.5 pb-0"><ToolPreview type={type}/></div>
+    <div className="relative min-h-[124px] p-4 pr-[72px]">
+     <div className="flex items-start gap-3"><span className={`grid h-11 w-11 shrink-0 place-items-center rounded-xl ${toolAccent[accent].icon}`}><Icon size={25} strokeWidth={2.6}/></span><div><h3 className="text-[15px] font-black leading-tight text-[#111329]">{title}</h3><p className="mt-1 text-[11px] leading-[1.45] text-[#53618a]">{desc}</p></div></div>
+     <a href={id==='signals'?'#signals':'#'+id} aria-label={`Open ${title}`} className={`absolute bottom-4 right-4 grid h-10 w-10 place-items-center rounded-full border transition hover:scale-105 hover:bg-violet-100 ${toolAccent[accent].ring}`}><ArrowRight size={19} strokeWidth={2.6}/></a>
+    </div>
+   </article>)}
+  </div>
+ </div>
+</section>}
+
 export function PromotionalBanners(){return <section className="mx-auto grid max-w-[1500px] gap-3 px-5 pt-3 lg:grid-cols-2 lg:px-8"><article id="affiliate" className="relative isolate min-h-[146px] overflow-hidden rounded-lg border border-orange-100 bg-gradient-to-r from-[#fff9f5] to-[#fff5ec] p-4"><div className="relative z-10 flex gap-3 sm:pr-[125px]"><Users size={43} className="shrink-0 text-orange-500"/><div className="min-w-0 flex-1"><h2 className="text-lg font-extrabold text-orange-600">Affiliate Program</h2><p className="text-xs text-slate-600">You build, we connect. Earn by sharing great tools.</p><div className="mt-3 grid grid-cols-2 gap-1 text-[10px] text-slate-600">{['High commission rates','Marketing resources','Real-time tracking','Grow together'].map(x=><span key={x} className="flex items-center gap-1"><CheckCircle2 size={13} className="shrink-0 text-orange-600"/>{x}</span>)}</div><div className="mt-3 flex justify-end"><ActionButton kind="orange" href="#affiliate">Join Affiliate Program <ArrowRight size={14}/></ActionButton></div></div><div className="pointer-events-none absolute bottom-7 right-0 hidden h-[105px] w-[160px] sm:block"><img src="/assets/affiliate-art.svg" alt="" className="h-full w-full object-contain"/></div></div></article><article id="custom-request" className="relative isolate min-h-[146px] overflow-hidden rounded-lg border border-blue-100 bg-gradient-to-r from-[#f2f6ff] to-[#eef4ff] p-4"><div className="relative z-10 flex gap-3 sm:pr-[105px]"><FileCode2 size={43} className="shrink-0 text-blue-600"/><div className="min-w-0 flex-1"><h2 className="text-lg font-extrabold text-blue-700">Custom Requests</h2><p className="text-xs text-slate-600">Need a specific indicator or EA? Submit your request.</p><div className="mt-3 grid gap-1 text-[10px] text-slate-600">{['Get it built by our team or the community','Competitive offers from verified developers','Track progress and communicate easily'].map(x=><span key={x} className="flex items-center gap-1"><CheckCircle2 size={13} className="shrink-0 text-blue-600"/>{x}</span>)}</div><div className="mt-2 flex items-center justify-between gap-2"><span aria-hidden="true" className="hidden sm:block"/><ActionButton kind="blue" href="#custom-request">Submit a Request <ArrowRight size={14}/></ActionButton></div></div><div className="pointer-events-none absolute right-0 top-1 hidden h-[105px] w-[145px] sm:block"><img src="/assets/custom-art.svg" alt="" className="h-full w-full object-contain"/></div></div></article></section>}
 export function PlatformTrustBanner(){return <section className="mx-auto max-w-[1500px] px-5 pt-3 lg:px-8"><div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-3 rounded-lg border border-[#dfe1fb] bg-white px-4 py-3 sm:px-7"><h2 className="text-[17px] font-black leading-tight tracking-tight text-[#171a2b]">Trade with the <span className="text-violet-700">Right Tools.</span><br/>Make Informed Decisions.</h2><div className="flex flex-wrap items-center gap-3 sm:gap-5">{platforms.map(x=><PlatformBadge key={x} name={x}/>)}</div><HandNote className="hidden text-sm lg:block">Multiple Platforms<br/>One Marketplace ↙</HandNote></div></section>}
 export function FeaturedProducts(){const [tab,setTab]=useState('Top Rated'),[saved,setSaved]=useState([]),[count,setCount]=useState(0);return <section id="featured" className="min-w-0"><div className="mb-3 flex flex-wrap items-center gap-3"><SectionHeading>Featured Products</SectionHeading><div className="flex items-center rounded-md bg-violet-50 p-1">{['Top Rated','Best Sellers','New Arrivals'].map(x=><button key={x} className={`rounded px-2.5 py-1.5 text-[10px] font-semibold ${tab===x?'bg-white text-violet-700 shadow-sm':'text-slate-500'}`} onClick={()=>setTab(x)}>{x}</button>)}</div><a href="#featured" className="ml-auto text-[11px] font-semibold text-violet-700">View All →</a></div><div className="grid gap-2 sm:grid-cols-3">{products.map(p=><article key={p.name} className="min-w-0 overflow-hidden rounded-lg border border-[#e7e9f9] bg-white p-1.5 shadow-sm"><div className="relative h-[95px] overflow-hidden rounded-md"><MarketChart className="h-full w-full" compact/><span style={{background:p.accent}} className="absolute left-1 top-1 rounded px-2 py-1 text-[9px] font-bold text-white">{p.tag}</span><button aria-label={`Save ${p.name}`} onClick={()=>setSaved(s=>s.includes(p.name)?s.filter(x=>x!==p.name):[...s,p.name])} className="absolute right-1 top-1 text-white"><Heart size={16} fill={saved.includes(p.name)?'#ef4444':'transparent'}/></button><span className="absolute bottom-1 right-1 rounded bg-white px-1 text-[8px] font-bold">{p.platform}</span></div><div className="px-1 pt-1.5"><h3 className="truncate text-[11px] font-extrabold text-slate-900">{p.name}</h3><p className="text-[10px] text-slate-500">{p.sub}</p><div className="text-[12px] tracking-tight text-amber-500">★★★★★ <span className="text-[9px] text-slate-400">(124)</span></div><div className="flex items-center justify-between"><strong className="text-[16px] text-slate-900">${p.price}</strong><IconButton label={`Add ${p.name} to cart`} onClick={()=>setCount(x=>x+1)} className="h-8 w-8"><ShoppingCart size={14}/></IconButton></div></div></article>)}</div><p aria-live="polite" className="sr-only">{count} items added to cart in this preview</p></section>}
